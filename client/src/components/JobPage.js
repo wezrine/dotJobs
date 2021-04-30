@@ -18,8 +18,20 @@ function JobPage() {
         })
     }
 
+    const updateStatus = (updatedJob) => {
+        fetch('http://localhost:8080/jobs', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedJob)
+            }).then(() => {
+                getAllJobs()
+            })
+    }
+
     return (
-      <JobList jobs = {jobs} />
+      <JobList jobs = {jobs} onStatusChange = {updateStatus}/>
     )
 }
 

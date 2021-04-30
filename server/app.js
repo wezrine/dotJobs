@@ -62,6 +62,24 @@ app.post('/jobs', (req, res) => {
     })
 })
 
+app.put('/jobs', (req, res) => {
+
+    const jobId = req.body.jobId
+    const status = req.body.status
+
+    let updatedJob = {
+        status: status
+    }
+
+    Job.findByIdAndUpdate(jobId, updatedJob, (error, result) => {
+        if(error) {
+            res.json({error: 'Unable to update'})
+        } else {
+            res.json({success: true})
+        }
+    })
+})
+
 app.post('/tasks', (req, res) => {
 
     const jobId = req.body.task.jobId

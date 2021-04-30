@@ -6,7 +6,7 @@ function DetailsList (props) {
     const tasks = props.tasks
 
     const [task, setTask] = useState({taskItem: ''}) // This is a new 'task'
-    // console.log(task.taskItem)
+
     const taskItems = tasks.map((task, index) => {
         return (
             <li key={index}><input type="checkbox"/>{task.taskItem}</li>
@@ -25,13 +25,10 @@ function DetailsList (props) {
         if (task.taskItem === '') {
             alert('Please enter task value')
         } else {
-            fetch('http://localhost:8080/tasks', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({task})
-            }).then(window.location.reload())
+
+            let newTask = {task}
+
+            props.onNewTask(newTask)
         }  
     }
 
@@ -43,7 +40,7 @@ function DetailsList (props) {
                             <article className="tile is-child notification is-light is-black">
                                 <p className="title">{job.companyTitle}</p>
                                 <p className="subtitle">{job.jobTitle}</p>
-                                <p className="subtitle">{job.companyURL}</p>
+                                <a className="subtitle" href={job.companyURL} target="_blank" rel="noreferrer">{job.companyURL}</a>
                             </article>
                             <article className="tile is-child notification is-info">
                                 <p className="title">Contact</p>
@@ -68,7 +65,6 @@ function DetailsList (props) {
                                     {taskItems ? taskItems : <h3>Loading...</h3>}
                                 </ul>
                                 <div className="is-flex-direction-row checklist-input">
-                                    {/* <input type="hidden" value={job._id} name="jobId" /> */}
                                     <input onChange={handleOnChange} name="taskItem" className="input" type="text" placeholder="Add a task"/>
                                     <button onClick={handleAddTask} className="button is-link" >Add</button>
                                 </div>

@@ -64,20 +64,8 @@ body {
   margin: 0 0 0 0;
 }
 
-.job .notification .checklist {
-  display: flex;
-  width: 27em;
-  justify-content: space-between;
-  margin-left: 2.5em;
-}
-
-.job .notification .checklist-item {
-  display: flex;
-  align-items: center;
-}
-
-.job .notification .checklist-item p {
-  margin-right: 1em;
+.job .notification .right .select {
+  margin-right: 1em;;
 }
 
 /* Details */

@@ -22,8 +22,21 @@ function DetailsPage({ match }) {
         })
     }
 
+    const addTask = (newTask) => {
+        console.log('added task')
+        fetch('http://localhost:8080/tasks', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newTask)
+        }).then(() => {
+            getJob()
+        })
+    }
+
     return ( 
-        <DetailsList job = {job} tasks = {tasks}/>
+        <DetailsList job = {job} tasks = {tasks} onNewTask = {addTask}/>
     )
 }
 
