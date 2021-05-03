@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import 'bulma/css/bulma.min.css'
-import 'bulma'
-
+import logo from './logo.png'
 import { NavLink } from "react-router-dom";
 
 
@@ -20,7 +18,7 @@ function Header() {
         <nav className="navbar" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <p className="navbar-item">
-                    <img src="https://bulma.io/images/bulma-logo.png" alt="logo" width="112" height="28" />
+                    <img src={logo} alt="logo" width="112" height="28" />
                 </p>
 
                 <p onClick={() => { setisBurgerActive(!isBurgerActive) }} role='button' className={`navbar-burger burger ${isBurgerActive ? 'is-active' : ''}`} aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>
@@ -33,8 +31,7 @@ function Header() {
             <div id='navbarBasicExample' className={`navbar-menu ${isBurgerActive ? 'is-active' : ''}`}>
                 <div className="navbar-start">
                     <NavLink to="/jobs" className="navbar-item">Jobs</NavLink>
-                    <NavLink to="/" className="navbar-item">Interviews</NavLink>
-                    <NavLink to="/" className="navbar-item">Calender</NavLink>
+                    <NavLink to="/add-job" className="navbar-item">Add a Job</NavLink>
 
                     <div className="navbar-item has-dropdown is-hoverable">
                         <p className="navbar-link">

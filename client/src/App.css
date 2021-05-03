@@ -65,10 +65,14 @@ body {
 }
 
 .job .notification .right .select {
-  margin-right: 1em;;
+  margin-right: 1em;
 }
 
 /* Details */
+
+.controls {
+  margin: 1em 0 0.5em 0;
+}
 
 .notification {
   padding-right: 1.5rem !important;
@@ -106,4 +110,10 @@ body {
 
 .checklist-input button {
   width: 20%;
+}
+
+/* Add Job */
+
+.tile.add-job input {
+  margin: 0.5em 0 0.5em 0;
 }

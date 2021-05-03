@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { NavLink } from "react-router-dom";
 
 function DetailsList (props) {
 
@@ -41,6 +42,19 @@ function DetailsList (props) {
                                 <p className="title">{job.companyTitle}</p>
                                 <p className="subtitle">{job.jobTitle}</p>
                                 <a className="subtitle" href={job.companyURL} target="_blank" rel="noreferrer">{job.companyURL}</a>
+                                <div className='row is-flex is-justify-content-space-between controls'>
+                                    <div className="select is-small">
+                                        <select>
+                                            <option>Accepted</option>
+                                            <option>Completed</option>
+                                            <option>In Progress</option>
+                                            <option>Denied</option>
+                                        </select>
+                                    </div>
+                                    <NavLink to = {`/update-job/${job._id}`}><button className="button is-small">Update</button></NavLink>
+                                    <button className="button is-small">Delete</button>
+                                    
+                                </div> 
                             </article>
                             <article className="tile is-child notification is-info">
                                 <p className="title">Contact</p>
