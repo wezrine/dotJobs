@@ -10,6 +10,8 @@ import LandingPage from './components/LandingPage'
 import BaseLayout from './components/BaseLayout';
 import JobPage from './components/JobPage'
 import DetailsPage from './components/DetailsPage'
+import AddJobPage from './components/AddJobPage';
+import UpdateJobPage from './components/UpdateJobPage'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +21,9 @@ ReactDOM.render(
             <Route exact path = '/' component = {LandingPage} />
             <Route path = '/jobs' component = {JobPage} />
             <Route path = '/details/:jobId' component = {DetailsPage} />
-          </Switch>
+            <Route path = '/add-job' component = {AddJobPage} />
+            <Route path = '/update-job/:jobId' component = {UpdateJobPage} />
+          </Switch> 
       </BaseLayout>
     </BrowserRouter>
   </React.StrictMode>,
