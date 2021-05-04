@@ -16,7 +16,6 @@ function DetailsPage({ match }) {
         fetch(`http://localhost:8080/details/${id}`)
         .then(response => response.json())
         .then(job => {
-            console.log(job)
             setJob(job)
             setTasks(job.tasks)
         })

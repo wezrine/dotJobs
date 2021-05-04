@@ -2,6 +2,10 @@ body {
   background-color: #3f4c4b;
 }
 
+a {
+  text-decoration: none !important;
+}
+
 .menu {
   width: 25%;
   border: 1px black solid;
@@ -25,6 +29,10 @@ body {
 .vertical input {
   width: 20em;
   margin: 0.5em;
+}
+
+.login-row .icon {
+  height: 100%;
 }
 
 /* Jobs Page */

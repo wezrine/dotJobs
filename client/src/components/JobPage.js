@@ -19,7 +19,8 @@ function JobPage() {
     }
 
     const updateStatus = (updatedJob) => {
-        fetch('http://localhost:8080/jobs', {
+        console.log(updatedJob)
+        fetch('http://localhost:8080/status', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

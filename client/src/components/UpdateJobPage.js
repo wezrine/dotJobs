@@ -19,8 +19,20 @@ function UpdateJobPage ({ match }) {
         })
     }
 
+    const updateJob = (updatedJob) => {
+        fetch('http://localhost:8080/jobs', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedJob)
+        }).then(() => {
+            window.location.replace(`/details/${updatedJob.jobId}`)
+        })
+    }
+
     return (
-       <UpdateJobList job = {job} />
+       <UpdateJobList job = {job} onUpdateJob = {updateJob} />
     )
 }
 

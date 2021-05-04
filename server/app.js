@@ -62,13 +62,46 @@ app.post('/jobs', (req, res) => {
     })
 })
 
-app.put('/jobs', (req, res) => {
+app.put('/status', (req, res) => {
 
     const jobId = req.body.jobId
     const status = req.body.status
-
+    
     let updatedJob = {
         status: status
+    }
+
+    Job.findByIdAndUpdate(jobId, updatedJob, (error, result) => {
+        if(error) {
+            res.json({error: 'Unable to update'})
+        } else {
+            res.json({success: true})
+        }
+    })
+})
+
+app.put('/jobs', (req, res) => {
+    const jobId = req.body.jobId
+    const companyTitle = req.body.updatedJob.companyTitle
+    const companyURL = req.body.updatedJob.companyURL
+    const jobTitle = req.body.updatedJob.jobTitle
+    const jobURL = req.body.updatedJob.jobURL
+    const jobDescription = req.body.updatedJob.jobDescription
+    const contactName = req.body.updatedJob.contactName
+    const contactRole = req.body.updatedJob.contactRole
+    const contactPhone = req.body.updatedJob.contactPhone
+    const contactEmail = req.body.updatedJob.contactEmail
+
+    let updatedJob = {
+        companyTitle: companyTitle,
+        companyURL: companyURL,
+        jobTitle: jobTitle,
+        jobURL: jobURL,
+        jobDescription: jobDescription,
+        contactName: contactName,
+        contactRole: contactRole,
+        contactPhone: contactPhone,
+        contactEmail: contactEmail
     }
 
     Job.findByIdAndUpdate(jobId, updatedJob, (error, result) => {
