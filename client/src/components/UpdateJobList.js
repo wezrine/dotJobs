@@ -1,8 +1,35 @@
-
+import React, { useState, useEffect } from 'react'
 
 function UpdateJobList(props) {
 
     const job = props.job
+    
+    const [updatedJob, setUpdatedJob] = useState({})
+
+    const handleOnChange = (e) => {
+        setUpdatedJob({
+            ...updatedJob,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    useEffect (() => {
+        setUpdatedJob({...props.job})
+    },[])
+    
+    const handleSubmit = (jobId) => {
+
+        let job = {
+            jobId: jobId,
+            updatedJob: {
+                ...props.job,
+                ...updatedJob
+            }
+        }
+
+        props.onUpdateJob(job)
+    }
+
 
     return (
         <div>
@@ -12,16 +39,16 @@ function UpdateJobList(props) {
                         <div className="tile is-parent is-vertical">
                             <article className="tile is-child notification is-light is-black">
                                 <p className="title">Job</p>
-                                <input className='input' type='text' placeholder='Company Name' name='companyTitle' value={job.companyTitle} />
-                                <input className='input' type='text' placeholder='Job Title' name='jobTitle' value={job.jobTitle} />
-                                <input className='input' type='text' placeholder='Company URL' name='companyURL' value={job.companyURL} />
+                                <input onChange={handleOnChange} className='input' type='text' placeholder='Company Name' name='companyTitle' defaultValue={job.companyTitle} />
+                                <input onChange={handleOnChange} className='input' type='text' placeholder='Job Title' name='jobTitle' defaultValue={job.jobTitle} />
+                                <input onChange={handleOnChange} className='input' type='text' placeholder='Company URL' name='companyURL' defaultValue={job.companyURL} />
                             </article>
                             <article className="tile is-child notification is-info">
                                 <p className="title">Contact</p>
-                                <input className='input' type='text' placeholder='Contact Name' name='contactName' value={job.contactName} />
-                                <input className='input' type='text' placeholder='Contact Role' name='contactRole' value={job.contactRole} />
-                                <input className='input' type='tel' placeholder='Contact Phone' name='contactPhone' value={job.contactPhone} />
-                                <input className='input' type='email' placeholder='Contact Email' name='contactEmail' value={job.contactEmail} />
+                                <input onChange={handleOnChange} className='input' type='text' placeholder='Contact Name' name='contactName' defaultValue={job.contactName} />
+                                <input onChange={handleOnChange} className='input' type='text' placeholder='Contact Role' name='contactRole' defaultValue={job.contactRole} />
+                                <input onChange={handleOnChange} className='input' type='tel' placeholder='Contact Phone' name='contactPhone' defaultValue={job.contactPhone} />
+                                <input onChange={handleOnChange} className='input' type='email' placeholder='Contact Email' name='contactEmail' defaultValue={job.contactEmail} />
                             </article>
                         </div>
                     </div>
@@ -30,10 +57,10 @@ function UpdateJobList(props) {
                     <article className="tile is-child notification is-dark">
                         <div className="content">
                             <p className="title">Description</p>
-                            <input className='input' type='url' placeholder='Job URL' name='jobURL' value={job.jobURL} />
+                            <input onChange={handleOnChange} className='input' type='url' placeholder='Job URL' name='jobURL' defaultValue={job.jobURL} />
                             <div className="content">
                                 <article className="message description">
-                                    <textarea className="message-body" value={job.jobDescription}></textarea>
+                                    <textarea onChange={handleOnChange} className="message-body" name="jobDescription" defaultValue={job.jobDescription}></textarea>
                                 </article>
                             </div>
                         </div>
@@ -41,7 +68,7 @@ function UpdateJobList(props) {
                 </div>
             </div>
             <div className="row has-text-centered">
-                <button className="button is-primary">Update Job</button>
+                <button onClick={() => handleSubmit(job._id)} className="button is-primary">Update Job</button>
             </div>
         </div>
     )

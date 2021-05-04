@@ -45,15 +45,15 @@ function DetailsList (props) {
                                 <div className='row is-flex is-justify-content-space-between controls'>
                                     <div className="select is-small">
                                         <select>
-                                            <option>Accepted</option>
-                                            <option>Completed</option>
-                                            <option>In Progress</option>
-                                            <option>Denied</option>
+                                            <option value='accepted'>Accepted</option>
+                                            <option value='complete'>Completed</option>
+                                            <option value='inProgress'>In Progress</option>
+                                            <option value='denied'>Denied</option>
                                         </select>
                                     </div>
-                                    <NavLink to = {`/update-job/${job._id}`}><button className="button is-small">Update</button></NavLink>
-                                    <button className="button is-small">Delete</button>
-                                    
+                                    <NavLink to = {`/update-job/${job._id}`}><span className="navbar-item tag is-danger is-medium">Update</span></NavLink>
+                                    {/* <button className="button is-small">Delete</button> */}
+                                    <span className="tag is-danger is-medium">Delete</span>
                                 </div> 
                             </article>
                             <article className="tile is-child notification is-info">

@@ -66,8 +66,14 @@ function Header() {
                         <button onClick={() => { closeModal() }} className="delete" aria-label="close"></button>
                     </header>
                     <section className="modal-card-body vertical">
-                       <input className="input" type="text" placeholder="Username"></input>
-                       <input className="input" type="password" placeholder="Password"></input>
+                        <div className='login-row'>
+                            <span className="icon"><i className="fas fa-user"></i></span>
+                            <input className="input" type="text" placeholder="Username"/>
+                        </div>
+                        <div className='login-row'>
+                            <span className="icon"><i className="fas fa-lock"></i></span>
+                            <input className="input" type="password" placeholder="Password"/>
+                        </div>
                     </section>
                     <footer className="modal-card-foot">
                         {isRegisterActive ? <button className="button is-success">Register</button> : <button className="button is-success">Login</button>}

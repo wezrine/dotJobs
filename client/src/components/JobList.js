@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import React, { useState } from 'react'
+import React from 'react'
 
 function JobList(props) {
 
@@ -8,7 +8,6 @@ function JobList(props) {
     const handleChangeStatus = (e, job) => {
 
         const status = e.target.value
-        console.log(job)
 
         let updatedJob = {
             jobId: job,
