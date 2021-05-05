@@ -5,27 +5,42 @@ import reportWebVitals from './reportWebVitals';
 import './App.css';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { createStore } from 'redux'
+import reducer from './store/reducer'
+import { Provider } from 'react-redux'
 
 import LandingPage from './components/LandingPage'
+import Login from './components/Login'
 import BaseLayout from './components/BaseLayout';
 import JobPage from './components/JobPage'
 import DetailsPage from './components/DetailsPage'
 import AddJobPage from './components/AddJobPage';
 import UpdateJobPage from './components/UpdateJobPage'
+import { setAuthenticationHeader } from './utils/authenticate';
+import requireAuth from './components/requireAuth'
+
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+const token = localStorage.getItem("jsonwebtoken")
+setAuthenticationHeader(token)
+store.dispatch({type: 'ON_LOGIN', payload: token})
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <BaseLayout>
-        <Switch>
-            <Route exact path = '/' component = {LandingPage} />
-            <Route path = '/jobs' component = {JobPage} />
-            <Route path = '/details/:jobId' component = {DetailsPage} />
-            <Route path = '/add-job' component = {AddJobPage} />
-            <Route path = '/update-job/:jobId' component = {UpdateJobPage} />
-          </Switch> 
-      </BaseLayout>
-    </BrowserRouter>
+    <Provider store = {store}>
+      <BrowserRouter>
+        <BaseLayout>
+          <Switch>
+              <Route exact path = '/' component = {LandingPage} />
+              <Route path = '/login' component = {Login} />
+              <Route path = '/jobs' component = {requireAuth(JobPage)} />
+              <Route path = '/details/:jobId' component = {DetailsPage} />
+              <Route path = '/add-job' component = {AddJobPage} />
+              <Route path = '/update-job/:jobId' component = {UpdateJobPage} />
+            </Switch> 
+        </BaseLayout>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -2,6 +2,13 @@ const express = require('express')
 const app = express() 
 const cors = require('cors')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+const authenticate = require('./authMiddleware')
+require('dotenv').config()
+
+// Schema
+const User = require('./schemas/user')
 const Job = require('./schemas/job')
 const Task = require('./schemas/task')
 
@@ -18,7 +25,7 @@ mongoose.connect('mongodb+srv://wezrine:alexander@cluster0.nxus8.mongodb.net/Job
     }
 })
 
-app.get('/jobs', (req, res) => {
+app.get('/jobs', authenticate, (req, res) => {
     Job.find({}, (error, job) => {
         if(error) {
             res.json({error: 'Unable to get job'})
@@ -55,27 +62,9 @@ app.post('/jobs', (req, res) => {
 
     job.save((error) => {
         if(error) {
-            res.json({error: 'Unable the save!'})
+            res.json({error: 'Unable to save!'})
         } else {
             res.json({success: true, message: 'Saved new post'})
-        }
-    })
-})
-
-app.put('/status', (req, res) => {
-
-    const jobId = req.body.jobId
-    const status = req.body.status
-    
-    let updatedJob = {
-        status: status
-    }
-
-    Job.findByIdAndUpdate(jobId, updatedJob, (error, result) => {
-        if(error) {
-            res.json({error: 'Unable to update'})
-        } else {
-            res.json({success: true})
         }
     })
 })
@@ -102,6 +91,24 @@ app.put('/jobs', (req, res) => {
         contactRole: contactRole,
         contactPhone: contactPhone,
         contactEmail: contactEmail
+    }
+
+    Job.findByIdAndUpdate(jobId, updatedJob, (error, result) => {
+        if(error) {
+            res.json({error: 'Unable to update'})
+        } else {
+            res.json({success: true})
+        }
+    })
+})
+
+app.put('/status', (req, res) => {
+
+    const jobId = req.body.jobId
+    const status = req.body.status
+    
+    let updatedJob = {
+        status: status
     }
 
     Job.findByIdAndUpdate(jobId, updatedJob, (error, result) => {
@@ -152,6 +159,46 @@ app.get('/details/:jobId', (req, res) => {
     }))
 })
 
-app.listen(8080, () => {
+app.post('/register', (req, res) => {
+    
+    const username = req.body.username
+    const password = req.body.password
+
+    bcrypt.genSalt(10, (error, salt) => {
+        bcrypt.hash(password, salt, (error, hash) => {
+            if (!error) {
+                let user = new User({
+                    username: username,
+                    password: hash
+                })
+                user.save().then((registeredUser) => {
+                    console.log(registeredUser)
+                    res.send('Registered')
+                })
+            }
+        })
+    })
+})
+
+app.post('/login', (req, res) => {
+
+    const username = req.body.username
+    const password = req.body.password
+
+    User.findOne({
+        username: username
+    }).then((user) => {
+        bcrypt.compare(password, user.password, (error, result) => {
+            if (result) {
+                const token = jwt.sign({ username: username }, process.env.JWT_KEY)
+                res.json({success: true, token: token, username: username})
+            } else {
+                res.json({success: false})
+            }
+        })
+    })
+})
+
+app.listen(process.env.PORT, () => {
     console.log('Server is running...')
 })
