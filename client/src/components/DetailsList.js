@@ -69,12 +69,24 @@ function DetailsList(props) {
         props.onDeleteJob(jobId)
     }
 
+    const handleFileUpload = (e, jobId) => {
+        console.log(jobId)
+        let selected = e.target.files[0]
+        var file = new FormData()
+        file.append('file', selected)
+        let filePackage = {
+            jobId: jobId,
+            file: file
+        }
+        props.onFileUpload(filePackage)
+    }
+
     return (
         <div className="tile is-ancestor">
             <div className="tile is-vertical is-8">
                 <div className="tile">
                     <div className="tile is-parent is-vertical">
-                        <article className="tile is-child notification is-title is-flex is-flex-direction-column">
+                        <article className="tile is-child notification is-light is-flex is-flex-direction-column">
                             <p className="title">{job.companyTitle}</p>
                             <p className="subtitle">{job.jobTitle}</p>
                             <a className="subtitle" href={job.companyURL} target="_blank" rel="noreferrer">Company's Website</a>
@@ -102,7 +114,7 @@ function DetailsList(props) {
                     <div className="tile is-parent">
                         <article className="tile is-child notification is-warning">
                             <p className="title">Files</p>
-
+                            <input onChange={(e) => handleFileUpload(e, job._id)} type="file" name="files" />
                         </article>
                     </div>
                 </div>

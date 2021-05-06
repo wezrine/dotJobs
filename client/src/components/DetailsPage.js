@@ -72,8 +72,21 @@ function DetailsPage({ match }) {
         })
     }
 
+    const uploadFile = (filePackage) => {
+        const jobId = filePackage.jobId
+        const file = filePackage.file
+
+        fetch(`http://localhost:8080/file/${jobId}`, {
+            method: 'POST',
+            header: {
+                'Content-Type': 'multi-part/form-data'
+            },
+            body: file
+        })
+    }
+    
     return ( 
-        <DetailsList job = {job} tasks = {tasks} onNewTask = {addTask} onDeleteTask = {deleteTask} onCheck = {changeTaskStatus} onDeleteJob = {deleteJob}/>
+        <DetailsList job = {job} tasks = {tasks} onNewTask = {addTask} onFileUpload = {uploadFile} onDeleteTask = {deleteTask} onCheck = {changeTaskStatus} onDeleteJob = {deleteJob}/>
     )
 }
 

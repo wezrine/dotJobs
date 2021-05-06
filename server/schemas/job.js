@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Task = require('./task')
+const File = require('./file')
 
 const jobSchema = new mongoose.Schema({
     userId: String,
@@ -13,7 +14,8 @@ const jobSchema = new mongoose.Schema({
     contactRole: String,
     contactPhone: String,
     contactEmail: String,
-    tasks: [Task.schema]
+    tasks: [Task.schema],
+    files: [File.schema]
 })
 
 const Job = mongoose.model('Job', jobSchema)
