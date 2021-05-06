@@ -40,7 +40,6 @@ function Header(props) {
                 </div>
                 <div className="navbar-end">
                     <div className="navbar-item">
-                        <NavLink to="/my-profile" className="navbar-item">My Profile</NavLink>
                         {props.isAuthenticated ? <button onClick={handleLogout} className="button is-link"><strong>Logout</strong></button> : <NavLink to='/login'><button className="button is-link"><strong>Login</strong></button></NavLink>}
                     </div>
                 </div>

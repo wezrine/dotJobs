@@ -5,9 +5,28 @@ function DetailsList(props) {
 
     const job = props.job
     const tasks = props.tasks
+    const files = props.files
 
     const [task, setTask] = useState({ taskItem: '' }) // This is a new 'task'
     const [isModalActive, setisModalActive] = useState(false)
+
+    const fileItems = files.map((file, index) => {
+
+        const handleDeleteFile = () => {
+            let deletedFile = {
+                jobId: job._id,
+                fileId: file._id
+            }
+            props.onDeleteFile(deletedFile)
+        }
+
+        return (
+            <li key={index}>
+                <a href={`http://localhost:8080/uploads/${file.fileURL}`} target="_blank"><i className="fas fa-file"></i>{file.fileName}</a>
+                <span onClick={handleDeleteFile} className="tag is-dark is-small">X</span>
+            </li>
+        )
+    })
 
     const taskItems = tasks.map((task, index) => {
 
@@ -114,56 +133,71 @@ function DetailsList(props) {
                     <div className="tile is-parent">
                         <article className="tile is-child notification is-warning">
                             <p className="title">Files</p>
-                            <input onChange={(e) => handleFileUpload(e, job._id)} type="file" name="files" />
+                            <div className='row is-flex upload-row'>
+                                <div className="file is-link is-small">
+                                    <label className="file-label">
+                                        <input onChange={(e) => handleFileUpload(e, job._id)} name="files" className="file-input" type="file" accept='.pdf' name="resume" />
+                                            <span className="file-cta">
+                                                <span className="file-icon">
+                                                    <i className="fas fa-upload"></i>
+                                                </span>
+                                                <span className="file-label">Upload a PDF</span>
+                                            </span>
+                                    </label>
+                                </div>
+                            </div>
+                                <ul>
+                                    {fileItems ? fileItems : <h3>Loading...</h3>}
+                                </ul>
+                        </article>
+                    </div>
+                    </div>
+                    <div className="tile is-parent">
+                        <article className="tile is-child notification is-danger">
+                            <p className="title">Checklist</p>
+                            <div className="content checklist">
+                                <ul>
+                                    {taskItems ? taskItems : <h3>Loading...</h3>}
+                                </ul>
+                                <div className="is-flex-direction-row checklist-input">
+                                    <input onChange={handleOnChange} name="taskItem" id='checklistInput' className="input" type="text" placeholder="Add a task" />
+                                    <button onClick={handleAddTask} className="button is-dark" >Add</button>
+                                </div>
+                            </div>
                         </article>
                     </div>
                 </div>
                 <div className="tile is-parent">
-                    <article className="tile is-child notification is-danger">
-                        <p className="title">Checklist</p>
-                        <div className="content checklist">
-                            <ul>
-                                {taskItems ? taskItems : <h3>Loading...</h3>}
-                            </ul>
-                            <div className="is-flex-direction-row checklist-input">
-                                <input onChange={handleOnChange} name="taskItem" id='checklistInput' className="input" type="text" placeholder="Add a task" />
-                                <button onClick={handleAddTask} className="button is-dark" >Add</button>
+                    <article className="tile is-child notification is-dark">
+                        <div className="content">
+                            <p className="title">Description</p>
+                            <a className="subtitle" href={job.jobURL} target="_blank" rel="noreferrer">Job Posting</a>
+                            <p className="subtitle">{job.jobURL}</p>
+                            <div className="content">
+                                <article className="message description">
+                                    <textarea className="message-body" value={job.jobDescription} disabled></textarea>
+                                </article>
                             </div>
                         </div>
                     </article>
                 </div>
-            </div>
-            <div className="tile is-parent">
-                <article className="tile is-child notification is-dark">
-                    <div className="content">
-                        <p className="title">Description</p>
-                        <a className="subtitle" href={job.jobURL} target="_blank" rel="noreferrer">Job Posting</a>
-                        <p className="subtitle">{job.jobURL}</p>
-                        <div className="content">
-                            <article className="message description">
-                                <textarea className="message-body" value={job.jobDescription} disabled></textarea>
-                            </article>
-                        </div>
+                <div className={`modal ${isModalActive ? 'is-active' : ''}`}>
+                    <div className="modal-background"></div>
+                    <div className="modal-card">
+                        <header className="modal-card-head">
+                            <p className="modal-card-title has-text-centered">Warning!</p>
+                        </header>
+                        <section className="modal-card-body has-text-centered">
+                            <h2>Are you sure you want to delete your application for {job.jobTitle} at {job.companyTitle}?</h2><br />
+                            <h3><strong>This is a process that cannot be reversed!</strong></h3>
+                        </section>
+                        <footer className="modal-card-foot is-justify-content-center">
+                            <button onClick={() => handleDelete(job._id)} className="button is-danger">Delete Job</button>
+                            <button onClick={closeModal} className="button">Cancel</button>
+                        </footer>
                     </div>
-                </article>
-            </div>
-            <div className={`modal ${isModalActive ? 'is-active' : ''}`}>
-                <div className="modal-background"></div>
-                <div className="modal-card">
-                    <header className="modal-card-head">
-                        <p className="modal-card-title has-text-centered">Warning!</p>
-                    </header>
-                    <section className="modal-card-body has-text-centered">
-                        <h2>Are you sure you want to delete your application for {job.jobTitle} at {job.companyTitle}?</h2><br/>
-                        <h3><strong>This is a process that cannot be reversed!</strong></h3>
-                    </section>
-                    <footer className="modal-card-foot is-justify-content-center">
-                        <button onClick={() => handleDelete(job._id)} className="button is-danger">Delete Job</button>
-                        <button onClick={closeModal} className="button">Cancel</button>
-                    </footer>
                 </div>
             </div>
-        </div>
 
 
     )

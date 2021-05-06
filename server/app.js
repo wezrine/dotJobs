@@ -262,6 +262,8 @@ app.post('/login', (req, res) => {
     })
 })
 
+// File Upload
+
 function uploadFile(req, callback) {
 
     new formidable.IncomingForm().parse(req)
@@ -300,7 +302,7 @@ function saveFileToDatabase(jobId, fileURL, originalFileName, onSaveCompleted) {
     })
 }
 
-app.post('/file/:jobId', (req, res) => {
+app.post('/files/:jobId', (req, res) => {
 
     const jobId = req.params.jobId
 
@@ -312,7 +314,23 @@ app.post('/file/:jobId', (req, res) => {
     })
 })
 
-app.get('/')
+app.delete('/files/:jobId/:fileId', (req, res) => {
+    const jobId = req.params.jobId
+    const fileId = req.params.fileId
+
+    Job.findByIdAndUpdate(
+        {"_id": jobId },
+        {"$pull": {"files": {"_id": fileId}}},
+        {new:true}, 
+        function (error, doc) {
+          if (error) {
+              res.json({success: false})
+          } else {
+              res.json({success: true})
+          }
+        }
+    )
+})
 
 app.listen(process.env.PORT, () => {
     console.log('Server is running...')
