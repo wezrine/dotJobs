@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Task = require('./task')
 
 const jobSchema = new mongoose.Schema({
+    userId: String,
     companyTitle: String,
     status: String,
     companyURL: String,

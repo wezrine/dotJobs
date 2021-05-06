@@ -25,8 +25,10 @@ mongoose.connect('mongodb+srv://wezrine:alexander@cluster0.nxus8.mongodb.net/Job
     }
 })
 
-app.get('/jobs', authenticate, (req, res) => {
-    Job.find({}, (error, job) => {
+app.get('/jobs/:userId', authenticate, (req, res) => {
+    let userId = req.params.userId
+
+    Job.find({'userId': userId}, (error, job) => {
         if(error) {
             res.json({error: 'Unable to get job'})
         } else {
@@ -36,6 +38,7 @@ app.get('/jobs', authenticate, (req, res) => {
 })
 
 app.post('/jobs', (req, res) => {
+    const userId = req.body.userId
     const companyTitle = req.body.companyTitle
     const status = 'inProgress'
     const companyURL = req.body.companyURL
@@ -48,6 +51,7 @@ app.post('/jobs', (req, res) => {
     const contactEmail = req.body.contactEmail
 
     let job = new Job({
+        userId: userId,
         companyTitle: companyTitle,
         status: status,
         companyURL: companyURL,
@@ -243,7 +247,7 @@ app.post('/login', (req, res) => {
         bcrypt.compare(password, user.password, (error, result) => {
             if (result) {
                 const token = jwt.sign({ username: username }, process.env.JWT_KEY)
-                res.json({success: true, token: token, username: username})
+                res.json({success: true, token: token, username: username, userId: user._id})
             } else {
                 res.json({success: false})
             }

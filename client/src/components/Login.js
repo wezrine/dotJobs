@@ -27,6 +27,7 @@ function Login (props) {
                 const token = result.token 
                 localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
                 localStorage.setItem("username", result.username)
+                localStorage.setItem("userId", result.userId)
                 props.onLogin(token)
                 setAuthenticationHeader(token)
                 props.history.push('/jobs') // take the user to the jobs screen    
@@ -53,6 +54,7 @@ function Login (props) {
                 const token = result.token 
                 localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
                 localStorage.setItem("username", result.username)
+                localStorage.setItem("userId", result.userId)
                 props.onLogin(token)
                 setAuthenticationHeader(token)
                 props.history.push('/jobs') // take the user to the jobs screen 
