@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { setAuthenticationHeader } from '../utils/authenticate'
 
 function Login (props) {
 
@@ -24,12 +25,11 @@ function Login (props) {
         .then(result => {
             if(result.success) {
                 const token = result.token 
-                // get the token and put it in local storage 
-                localStorage.setItem("jsonwebtoken", token)
+                localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
                 localStorage.setItem("username", result.username)
                 props.onLogin(token)
-                // take the user to the jobs screen 
-                props.history.push('/jobs')
+                setAuthenticationHeader(token)
+                props.history.push('/jobs') // take the user to the jobs screen    
             }
         })
     }
@@ -51,12 +51,11 @@ function Login (props) {
         .then(result => {
             if(result.success) {
                 const token = result.token 
-                // get the token and put it in local storage 
-                localStorage.setItem("jsonwebtoken", token)
+                localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
                 localStorage.setItem("username", result.username)
                 props.onLogin(token)
-                // take the user to the jobs screen 
-                props.history.push('/jobs')
+                setAuthenticationHeader(token)
+                props.history.push('/jobs') // take the user to the jobs screen 
             }
         })
     }
@@ -89,7 +88,7 @@ function Login (props) {
                         </div>
                     </section>
                     <footer className="modal-card-foot">
-                        {isRegisterActive ? <button onClick={handleRegister} className="button is-success">Register</button> : <button onClick={handleLogin} className="button is-success">Login</button>}
+                        {isRegisterActive ? <button onClick={handleRegister} className="button is-link">Register</button> : <button onClick={handleLogin} className="button is-link">Login</button>}
                         {isRegisterActive ? <button className="button" onClick={() => { setisRegisterActive(false) }}>Login</button> : <button className="button" onClick={() => { setisRegisterActive(true) }}>Register</button>}
                         {isRegisterActive ? '' : <button onClick={handleContinueAsGuest} className="button">Continue as Guest</button>}
                     </footer>

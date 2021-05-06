@@ -22,7 +22,6 @@ function DetailsPage({ match }) {
     }
 
     const addTask = (newTask) => {
-        console.log('added task')
         fetch('http://localhost:8080/tasks', {
             method: 'POST',
             headers: {
@@ -34,8 +33,46 @@ function DetailsPage({ match }) {
         })
     }
 
+    const deleteTask = (task) => {
+        fetch(`http://localhost:8080/tasks/${task.jobId}/${task.taskId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            getJob()
+        })
+    }
+
+    const deleteJob = (jobId) => {
+        fetch(`http://localhost:8080/jobs/${jobId}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(() => {
+            window.location.replace('/jobs')
+        })
+    }
+
+    const changeTaskStatus = (updatedTask) => {
+        let updatedStatus = {
+            updatedStatus: updatedTask.isCompleted
+        }
+        fetch(`http://localhost:8080/tasks/${updatedTask.jobId}/${updatedTask.taskId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedStatus)
+        }).then(() => {
+            console.log('fired')
+            getJob()
+        })
+    }
+
     return ( 
-        <DetailsList job = {job} tasks = {tasks} onNewTask = {addTask}/>
+        <DetailsList job = {job} tasks = {tasks} onNewTask = {addTask} onDeleteTask = {deleteTask} onCheck = {changeTaskStatus} onDeleteJob = {deleteJob}/>
     )
 }
 

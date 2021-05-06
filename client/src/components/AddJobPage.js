@@ -28,13 +28,13 @@ function AddJobPage() {
                 <div className="tile is-vertical is-6">
                     <div className="tile">
                         <div className="tile is-parent is-vertical">
-                            <article className="tile add-job is-child notification is-light is-black">
+                            <article className="tile add-job is-child notification is-title">
                                 <p className="title">Job</p>
                                 <input onChange={handleOnChange} className='input' type='text' placeholder='Company Name' name='companyTitle'/>
                                 <input onChange={handleOnChange} className='input' type='text' placeholder='Job Title' name='jobTitle' />
                                 <input onChange={handleOnChange} className='input' type='text' placeholder='Company URL' name='companyURL'/>
                             </article>
-                            <article className="tile  add-job is-child notification is-info">
+                            <article className="tile  add-job is-child notification is-link">
                                 <p className="title">Contact</p>
                                 <input onChange={handleOnChange} className='input' type='text' placeholder='Contact Name' name='contactName' />
                                 <input onChange={handleOnChange} className='input' type='text' placeholder='Contact Role' name='contactRole' />
@@ -59,7 +59,7 @@ function AddJobPage() {
                 </div>
             </div>
             <div className="row has-text-centered">
-                <button onClick={handleAddJob} className="button is-primary">Add Job</button>
+                <button onClick={handleAddJob} className="button is-link">Add Job</button>
             </div>
 
         </div>

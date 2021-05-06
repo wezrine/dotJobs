@@ -1,9 +1,64 @@
 body {
-  background-color: #3f4c4b;
+  background-color: #464866;
 }
 
 a {
   text-decoration: none !important;
+}
+
+ul {
+  margin-left: 0.5em !important;
+}
+/* Colors */
+
+.is-primary {
+  background: #2e9cca !important;
+}
+
+.is-success {
+  background: #32965d !important;
+}
+
+.is-link {
+  background: #1b79c5 !important;
+}
+
+.is-danger {
+  background: #d64045 !important;
+}
+
+.is-warning {
+  background: #fcdc4d !important;
+}
+
+.is-info {
+  background: #494D97 !important;
+}
+
+/* .is-light {
+  background: #aaabb8 !important;
+} */
+
+.is-dark {
+  background: #25274d !important;
+  color: #fff;
+}
+
+.is-title {
+  background: #aaabb8 !important;
+}
+
+/* Nav */
+
+.navbar a {
+  color: #fff;
+}
+.navbar.is-dark .navbar-start > a.navbar-item:hover {
+  background: #1B1C37 !important;
+}
+a.navbar-item:hover {
+  background: #1B1C37 !important;
+  color: #fff !important;
 }
 
 .menu {
@@ -76,10 +131,22 @@ a {
   margin-right: 1em;
 }
 
+/* Footer */
+
+.footer strong {
+  color: #fff
+}
+
+.footer a {
+  color: white;
+}
+
 /* Details */
 
 .controls {
   margin: 1em 0 0.5em 0;
+  width: 11em;
+  justify-content: space-between;
 }
 
 .notification {
@@ -118,6 +185,18 @@ a {
 
 .checklist-input button {
   width: 20%;
+}
+
+.details.select {
+  width: 9em;
+}
+
+.checklist .item {
+  width:fit-content;
+}
+
+.checklist .item p {
+  margin: 0 1em 0 1em !important;
 }
 
 /* Add Job */

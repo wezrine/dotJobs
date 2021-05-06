@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { setAuthenticationHeader } from '../utils/authenticate'
 import JobList from './JobList'
 
 function JobPage() {
@@ -13,30 +12,13 @@ function JobPage() {
 
     const getAllJobs = () => {
 
-        // const token = localStorage.getItem('jsonwebtoken')
-
-        // fetch('http://localhost:8080/jobs', {
-        //     method: 'GET', 
-        //     headers: {
-        //         'Authorization': `Bearer ${token}`
-        //     }
-        // })
-        // .then(response => response.json())
-        // .then(jobs => {
-        //     console.log(jobs)
-        //     setJobs(jobs)
-        // })
-
-        // axios.get('http://localhost:8080/jobs')
-        // .then(response => {
-        //     console.log(response.data)
-        // })
 
         axios.get('http://localhost:8080/jobs')
         .then(response => {
             if(response.data.error) {
                 console.log(response.data.error)
             } else {
+
                 setJobs(response.data)
             }
         })

@@ -5,10 +5,10 @@ import React from 'react'
 function Footer() {
 
     return (
-        <footer className="footer">
+        <footer className="footer is-dark">
         <div className="content has-text-centered">
             <p>
-            <strong>Jobs</strong> by <a href="https://www.williamezrine.com">William Ezrine</a>. 
+            <strong>Jobs</strong> by <a href="https://www.williamezrine.com" target="_blank">William Ezrine</a>. 
             <br/>
             This is a project built using JavaScript, React.js, Redux, Node.js, HTML, CSS, & Bulma. 
             </p>

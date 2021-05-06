@@ -102,6 +102,21 @@ app.put('/jobs', (req, res) => {
     })
 })
 
+app.delete('/jobs/:jobId', (req, res) => {
+
+    const jobId = req.params.jobId
+
+    Job.findByIdAndDelete(jobId, (error, result) => {
+        if(error) {
+            res.json({error: 'Unable to delete'})
+        } else {
+            console.log(result)
+            res.json({success: true})
+        }
+    })
+
+})
+
 app.put('/status', (req, res) => {
 
     const jobId = req.body.jobId
@@ -145,6 +160,40 @@ app.post('/tasks', (req, res) => {
             })
         }
     })
+})
+
+app.put('/tasks/:jobId/:taskId', (req, res) => {
+    const jobId = req.params.jobId
+    const taskId = req.params.taskId
+    const updatedStatus = req.body.updatedStatus
+
+    Job.findOneAndUpdate(
+        {'_id': jobId, 'tasks._id': taskId},
+        {
+            '$set': {
+                'tasks.$.isCompleted': updatedStatus
+            }
+        },
+        function (error, doc) {
+            console.log(error)
+        }
+    )
+})
+
+app.delete('/tasks/:jobId/:taskId', (req, res) => {
+    const jobId = req.params.jobId
+    const taskId = req.params.taskId
+
+    Job.findOneAndDelete(
+        {'_id': jobId, 'tasks._id': taskId},
+        function (error, doc) {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log(doc)
+            }
+        }
+    )
 })
 
 app.get('/details/:jobId', (req, res) => {
