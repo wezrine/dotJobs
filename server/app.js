@@ -6,6 +6,8 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const authenticate = require('./authMiddleware')
 require('dotenv').config()
+const formidable = require('formidable')
+const { uuid } = require('uuidv4')
 
 // Schema
 const User = require('./schemas/user')
@@ -14,6 +16,10 @@ const Task = require('./schemas/task')
 
 app.use(cors())
 app.use(express.json())
+
+// static folder
+app.use('/uploads', express.static('uploads'))
+global.__basedir = __dirname
 
 mongoose.connect('mongodb+srv://wezrine:alexander@cluster0.nxus8.mongodb.net/JobTracker?retryWrites=true&w=majority', {
     useNewUrlParser: true, useUnifiedTopology: true
@@ -252,6 +258,31 @@ app.post('/login', (req, res) => {
                 res.json({success: false})
             }
         })
+    })
+})
+
+function uploadFile(req, callback) {
+
+    new formidable.IncomingForm().parse(req)
+    .on('fileBegin', (name, file) => {
+        file.originalFileName = file.name
+        uniqueFilename = `${uuid.v4()}.${file.name.split('.').pop()}`
+        file.name = uniqueFilename
+        file.path = __basedir + '/uploads/' + file.name
+        console.log(file)
+    })
+    .on('file', (name, file) => {
+        callback(file.name, file.originalFileName)
+    })
+}
+
+app.post('/upload', (req, res) => {
+
+    uploadFile(req, (fileURL, originalFileName) => {
+        
+        // saveFileToDatabase(fileURL, originalFileName)
+
+        res.send('UPLOAD')
     })
 })
 
