@@ -18,6 +18,8 @@ const File = require('./schemas/file')
 app.use(cors())
 app.use(express.json())
 
+const PORT = process.env.PORT || 8080
+
 // static folder
 app.use('/uploads', express.static('uploads'))
 global.__basedir = __dirname
