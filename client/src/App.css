@@ -136,6 +136,14 @@ a.navbar-item:hover {
   margin-right: 1em;
 }
 
+.file {
+  width: fit-content;
+}
+
+.upload-row {
+  margin-bottom: 2em;
+}
+
 @media screen and (max-width: 730px) {
   .job .notification .right .right-item {
     font-size: 0.75em;

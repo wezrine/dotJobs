@@ -20,7 +20,6 @@ import DetailsPage from './components/DetailsPage'
 import AddJobPage from './components/AddJobPage';
 import UpdateJobPage from './components/UpdateJobPage'
 import HowItWorksPage from './components/HowItWorksPage'
-import ProfilePage from './components/ProfilePage'
 
 
 // Redux
@@ -40,7 +39,6 @@ ReactDOM.render(
               <Route exact path = '/' component = {LandingPage} />
               <Route path = '/login' component = {Login} />
               <Route path = '/how-it-works' component = {HowItWorksPage} />
-              <Route path = '/my-profile' component = {requireAuth(ProfilePage)} />
               <Route path = '/jobs' component = {requireAuth(JobPage)} />
               <Route path = '/details/:jobId' component = {requireAuth(DetailsPage)} />
               <Route path = '/add-job' component = {requireAuth(AddJobPage)} />
