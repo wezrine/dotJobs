@@ -50,11 +50,11 @@ function DetailsList(props) {
         if (task.taskItem === '') {
             alert('Please enter task value')
         } else {
-
             let newTask = { task }
-
             props.onNewTask(newTask)
         }
+        const checklistInput = document.getElementById('checklistInput')
+        checklistInput.value = ''
     }
 
     const openModal = () => {
@@ -114,7 +114,7 @@ function DetailsList(props) {
                                 {taskItems ? taskItems : <h3>Loading...</h3>}
                             </ul>
                             <div className="is-flex-direction-row checklist-input">
-                                <input onChange={handleOnChange} name="taskItem" className="input" type="text" placeholder="Add a task" />
+                                <input onChange={handleOnChange} name="taskItem" id='checklistInput' className="input" type="text" placeholder="Add a task" />
                                 <button onClick={handleAddTask} className="button is-dark" >Add</button>
                             </div>
                         </div>
