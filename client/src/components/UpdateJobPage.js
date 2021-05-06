@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import UpdateJobList from './UpdateJobList'
+import { useHistory } from "react-router-dom";
 
 function UpdateJobPage ({ match }) {
+
+    let history = useHistory()
 
     const id = match.params.jobId
     const [job, setJob] = useState([])
@@ -27,7 +30,7 @@ function UpdateJobPage ({ match }) {
             },
             body: JSON.stringify(updatedJob)
         }).then(() => {
-            window.location.replace(`/details/${updatedJob.jobId}`)
+            history.push(`/details/${updatedJob.jobId}`)
         })
     }
 

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import logo from './logo-white.png'
-import { NavLink } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { setAuthenticationHeader } from '../utils/authenticate'
 import { connect } from 'react-redux'
 
 
 function Header(props) {
+
+    let history = useHistory()
 
     const [isBurgerActive, setisBurgerActive] = useState(false)
 
@@ -13,9 +15,9 @@ function Header(props) {
 
         localStorage.removeItem("jsonwebtoken")
         localStorage.removeItem("username")
+        localStorage.removeItem('userId')
         setAuthenticationHeader(null)
-
-        window.location.replace('/login')
+        history.push('/login')
     }
 
     return (

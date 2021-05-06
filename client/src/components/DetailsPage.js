@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from "react-router-dom";
 import DetailsList from './DetailsList'
 
 function DetailsPage({ match }) {
+
+    let history = useHistory()
 
     const id = match.params.jobId
 
@@ -54,7 +57,7 @@ function DetailsPage({ match }) {
                 'Content-Type': 'application/json'
             }
         }).then(() => {
-            window.location.replace('/jobs')
+            history.push('/jobs')
         })
     }
 

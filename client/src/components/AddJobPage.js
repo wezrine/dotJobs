@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { useHistory } from "react-router-dom";
 
 function AddJobPage() {
 
+
+    let history = useHistory()
 
     const [job, setJob] = useState({})
 
@@ -20,7 +23,7 @@ function AddJobPage() {
                 'Content-Type': 'application/json'
            },
            body: JSON.stringify(job)
-        }).then(window.location.replace('/jobs'))
+        }).then(history.push('/jobs'))
     }
 
     return (

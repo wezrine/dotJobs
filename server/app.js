@@ -20,6 +20,12 @@ app.use(express.json())
 
 const PORT = process.env.PORT || 8080
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
 // static folder
 app.use('/uploads', express.static('uploads'))
 global.__basedir = __dirname
@@ -32,6 +38,10 @@ mongoose.connect('mongodb+srv://wezrine:alexander@cluster0.nxus8.mongodb.net/Job
     } else {
         console.log(error)
     }
+})
+
+app.get('/', (req, res) => {
+    res.json({success: 'true'})
 })
 
 app.get('/jobs/:userId', authenticate, (req, res) => {
