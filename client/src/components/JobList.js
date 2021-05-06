@@ -44,16 +44,14 @@ function JobList(props) {
         }
 
         return (
-            <div key={index} className="container job is-fluid">
+            <div key={index} className=" job-container container job is-fluid">
                 <div className={`notification ${setStatus(job.status)}`}>
                     <div className="left">
-                        <div className="job-label">
-                            <h2><strong>{job.companyTitle}</strong></h2>
-                            <p>{job.jobTitle}</p>
-                        </div>
+                        <h2><strong>{job.companyTitle}</strong></h2>
+                        <p>{job.jobTitle}</p>
                     </div>
-                    <div className="right">
-                        <div className="select">
+                    <div className="right is-flex is-flex-wrap-wrap">
+                        <div className="select right-item">
                             <select value={job.status} onChange={(e) => handleChangeStatus(e, job._id)} name="status">
                                 <option value="accepted">Accepted</option>
                                 <option value="complete">Complete</option>
@@ -61,7 +59,7 @@ function JobList(props) {
                                 <option value="denied">Denied</option>
                             </select>
                         </div>
-                        <NavLink to={`/details/${job._id}`} className="button is-light">Details</NavLink>
+                        <NavLink to={`/details/${job._id}`} className="right-item button is-light">Details</NavLink>
                     </div>
                 </div>
             </div>

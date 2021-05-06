@@ -103,13 +103,14 @@ a.navbar-item:hover {
 
 .job .notification .left {
   display: flex;
+  flex-direction: column;
 }
 
-.job .notification .left .job-label {
-  width: 20em;
+.job .notification .left {
+  width: fit-content;
 }
 
-.job .notification .left .job-label strong {
+.job .notification .left strong {
   font-size: 1.75em;
 }
 
@@ -127,8 +128,46 @@ a.navbar-item:hover {
   margin: 0 0 0 0;
 }
 
+.job .notification .right {
+  align-self: center;
+}
+
 .job .notification .right .select {
   margin-right: 1em;
+}
+
+@media screen and (max-width: 730px) {
+  .job .notification .right .right-item {
+    font-size: 0.75em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .job-container {
+    padding: 0 !important;
+  }
+
+  .job .notification {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .job .notification .right {
+    align-self: flex-start;
+    margin: 1em 0 0 0;
+  }
+}
+
+@media screen and (max-width: 360px) {
+
+  .job .notification .right .right-item {
+    margin: 0.5em 0 0.5em 0;
+  }
+
+  .job .notification .right .select {
+    margin-right: 1em;
+  }
 }
 
 /* Footer */

@@ -74,7 +74,7 @@ function DetailsList(props) {
             <div className="tile is-vertical is-8">
                 <div className="tile">
                     <div className="tile is-parent is-vertical">
-                        <article className="tile is-child notification is-white is-flex is-flex-direction-column">
+                        <article className="tile is-child notification is-title is-flex is-flex-direction-column">
                             <p className="title">{job.companyTitle}</p>
                             <p className="subtitle">{job.jobTitle}</p>
                             <a className="subtitle" href={job.companyURL} target="_blank" rel="noreferrer">Company's Website</a>

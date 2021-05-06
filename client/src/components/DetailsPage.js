@@ -39,7 +39,8 @@ function DetailsPage({ match }) {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then(() => {
+        }).then((response) => response.json())
+        .then(result => {
             getJob()
         })
     }
@@ -65,8 +66,8 @@ function DetailsPage({ match }) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(updatedStatus)
-        }).then(() => {
-            console.log('fired')
+        }).then((response) => response.json())
+        .then(result => {
             getJob()
         })
     }

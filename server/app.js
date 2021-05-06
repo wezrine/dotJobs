@@ -175,7 +175,7 @@ app.put('/tasks/:jobId/:taskId', (req, res) => {
             }
         },
         function (error, doc) {
-            console.log(error)
+            res.json({success: true})
         }
     )
 })
@@ -184,17 +184,20 @@ app.delete('/tasks/:jobId/:taskId', (req, res) => {
     const jobId = req.params.jobId
     const taskId = req.params.taskId
 
-    Job.findOneAndDelete(
-        {'_id': jobId, 'tasks._id': taskId},
+    Job.findOneAndUpdate(
+        {"_id": jobId },
+        {"$pull": {"tasks": {"_id": taskId}}},
+        {new:true}, 
         function (error, doc) {
-            if (error) {
-                console.log(error)
-            } else {
-                console.log(doc)
-            }
+          if (error) {
+              res.json({success: false})
+          } else {
+              res.json({success: true})
+          }
         }
-    )
-})
+    );
+  
+  })
 
 app.get('/details/:jobId', (req, res) => {
     const jobId = req.params.jobId
