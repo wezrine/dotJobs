@@ -11,21 +11,18 @@ function JobPage() {
     },[])
 
     const getAllJobs = () => {
-
-
-        axios.get('http://localhost:8080/jobs')
+        const userId = localStorage.getItem('userId')
+        axios.get(`http://localhost:8080/jobs/${userId}`)
         .then(response => {
             if(response.data.error) {
                 console.log(response.data.error)
             } else {
-
                 setJobs(response.data)
             }
         })
     }
 
     const updateStatus = (updatedJob) => {
-        console.log(updatedJob)
         fetch('http://localhost:8080/status', {
                 method: 'PUT',
                 headers: {

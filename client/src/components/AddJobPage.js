@@ -8,6 +8,7 @@ function AddJobPage() {
     const handleOnChange = (e) => {
         setJob({
             ...job,
+            userId: localStorage.getItem('userId'),
             [e.target.name]: e.target.value
         })
     }
