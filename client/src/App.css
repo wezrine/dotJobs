@@ -9,6 +9,66 @@ a {
 ul {
   margin-left: 0.5em !important;
 }
+
+.page-content {
+  min-height: 70vh;
+  height: 100%;
+  /* margin: 2em; */
+}
+
+.navbar-menu.is-active {
+  background-color: #25274d;
+}
+
+/* .modal-card {
+  width: 25em !important;
+
+} */
+
+.login-box {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-card {
+  height: fit-content;
+  width: fit-content !important;
+  margin: 0 !important;
+}
+
+.tile-page {
+  margin: 2em !important;
+}
+
+.guest.button {
+  margin-left: 0.5em;
+}
+
+.login-row {
+  align-items: center;
+}
+
+@media screen and (max-width: 450px) {
+
+  .login.input {
+    width: 10em;
+  }
+
+  .modal-card-foot {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .guest.button {
+    margin-top: 0.5em;
+    margin-left: 0 !important;
+  }
+}
+
 /* Colors */
 
 .is-primary {
@@ -71,10 +131,6 @@ a.navbar-item:hover {
   background: black;
 }
 
-.page-content {
-  height: 100%;
-  margin: 2em;
-}
 
 .vertical {
   display: flex;
@@ -151,10 +207,6 @@ a.navbar-item:hover {
 }
 
 @media screen and (max-width: 600px) {
-
-  .job-container {
-    padding: 0 !important;
-  }
 
   .job .notification {
     display: flex;
@@ -244,6 +296,48 @@ a.navbar-item:hover {
 
 .checklist .item p {
   margin: 0 1em 0 1em !important;
+}
+.file-row {
+  margin-top: 0.5em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.file-row a {
+  margin-right: 0.5em;
+  font-size: 0.75em;
+}
+
+.fa-file {
+  margin-right: 0.25em;
+  font-size: 1em !important;
+}
+
+.website {
+  width: fit-content;
+}
+.description {
+  margin-top: 1em;
+}
+
+.tile.is-ancestor {
+  margin: 1em;
+}
+
+.task-delete {
+  color: #25274d !important;
+}
+
+@media screen and (min-width: 768px) and (max-width: 900px) {
+
+  .file-row a {
+    font-size: 0.45em;
+  }
+
+  .fa-file, .file.fa-minus-circle {
+    font-size: 0.8em !important;
+  }
 }
 
 /* Add Job */

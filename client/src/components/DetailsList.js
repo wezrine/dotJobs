@@ -21,9 +21,10 @@ function DetailsList(props) {
         }
 
         return (
-            <li key={index}>
-                <a href={`http://localhost:8080/uploads/${file.fileURL}`} target="_blank"><i className="fas fa-file"></i>{file.fileName}</a>
-                <span onClick={handleDeleteFile} className="tag is-dark is-small">X</span>
+            <li key={index} className="file-row">
+                <i className="fas file fa-file"></i>
+                <a href={`http://localhost:8080/uploads/${file.fileURL}`} target="_blank">{file.fileName}</a>
+                <i onClick={handleDeleteFile} className="fas fa-minus-circle"></i>
             </li>
         )
     })
@@ -52,7 +53,7 @@ function DetailsList(props) {
             <li className="item is-flex is-align-items-center" key={index}>
                 <input onClick={() => handleCheck(job._id, task.isCompleted)} type="checkbox" defaultChecked={task.isCompleted} />
                 <p>{task.taskItem}</p>
-                <span onClick={() => handleDeleteTask()} className="tag is-dark is-small">X</span>
+                <i onClick={() => handleDeleteTask()} className="fas task-delete fa-minus-circle"></i>
             </li>
         )
     })
@@ -101,14 +102,14 @@ function DetailsList(props) {
     }
 
     return (
-        <div className="tile is-ancestor">
+        <div className="tile-page tile is-ancestor">
             <div className="tile is-vertical is-8">
                 <div className="tile">
                     <div className="tile is-parent is-vertical">
                         <article className="tile is-child notification is-light is-flex is-flex-direction-column">
                             <p className="title">{job.companyTitle}</p>
                             <p className="subtitle">{job.jobTitle}</p>
-                            <a className="subtitle" href={job.companyURL} target="_blank" rel="noreferrer">Company's Website</a>
+                            <a className="subtitle website" href={job.companyURL} target="_blank" rel="noreferrer">Website</a>
                             <div className="details select">
                                 <select value={job.status}>
                                     <option value='accepted'>Accepted</option>
@@ -171,8 +172,7 @@ function DetailsList(props) {
                     <article className="tile is-child notification is-dark">
                         <div className="content">
                             <p className="title">Description</p>
-                            <a className="subtitle" href={job.jobURL} target="_blank" rel="noreferrer">Job Posting</a>
-                            <p className="subtitle">{job.jobURL}</p>
+                            <a className="subtitle job-posting" href={job.jobURL} target="_blank" rel="noreferrer">Job Posting</a>
                             <div className="content">
                                 <article className="message description">
                                     <textarea className="message-body" value={job.jobDescription} disabled></textarea>

@@ -2,37 +2,37 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { setAuthenticationHeader } from '../utils/authenticate'
 
-function Login (props) {
+function Login(props) {
 
     const [credentials, setCredentials] = useState({})
     const [isRegisterActive, setisRegisterActive] = useState(false)
 
     const handleOnChange = (e) => {
         setCredentials({
-            ...credentials, 
+            ...credentials,
             [e.target.name]: e.target.value
         })
     }
 
     const handleLogin = () => {
         fetch('http://localhost:8080/login', {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }, 
+            },
             body: JSON.stringify(credentials)
         }).then(response => response.json())
-        .then(result => {
-            if(result.success) {
-                const token = result.token 
-                localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
-                localStorage.setItem("username", result.username)
-                localStorage.setItem("userId", result.userId)
-                props.onLogin(token)
-                setAuthenticationHeader(token)
-                props.history.push('/jobs') // take the user to the jobs screen    
-            }
-        })
+            .then(result => {
+                if (result.success) {
+                    const token = result.token
+                    localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
+                    localStorage.setItem("username", result.username)
+                    localStorage.setItem("userId", result.userId)
+                    props.onLogin(token)
+                    setAuthenticationHeader(token)
+                    props.history.push('/jobs') // take the user to the jobs screen    
+                }
+            })
     }
 
     const handleContinueAsGuest = () => {
@@ -43,29 +43,29 @@ function Login (props) {
         }
 
         fetch('http://localhost:8080/login', {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
-            }, 
+            },
             body: JSON.stringify(guest)
         }).then(response => response.json())
-        .then(result => {
-            if(result.success) {
-                const token = result.token 
-                localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
-                localStorage.setItem("username", result.username)
-                localStorage.setItem("userId", result.userId)
-                props.onLogin(token)
-                setAuthenticationHeader(token)
-                props.history.push('/jobs') // take the user to the jobs screen 
-            }
-        })
+            .then(result => {
+                if (result.success) {
+                    const token = result.token
+                    localStorage.setItem("jsonwebtoken", token) // get the token and put it in local storage 
+                    localStorage.setItem("username", result.username)
+                    localStorage.setItem("userId", result.userId)
+                    props.onLogin(token)
+                    setAuthenticationHeader(token)
+                    props.history.push('/jobs') // take the user to the jobs screen 
+                }
+            })
     }
 
     const handleRegister = () => {
         fetch('http://localhost:8080/register', {
             method: 'POST',
-            headers:  {
+            headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(credentials)
@@ -75,32 +75,36 @@ function Login (props) {
     }
 
     return (
-                <div className="modal-card">
-                    <header className="modal-card-head">
-                        {isRegisterActive ? <p className="modal-card-title">Register</p> : <p className="modal-card-title">Login</p>}
-                    </header>
-                    <section className="modal-card-body vertical">
-                        <div className='login-row'>
-                            <span className="icon"><i className="fas fa-user"></i></span>
-                            <input onChange={handleOnChange} className="input" type="text" placeholder="Username" name="username" />
-                        </div>
-                        <div className='login-row'>
-                            <span className="icon"><i className="fas fa-lock"></i></span>
-                            <input onChange={handleOnChange} className="input" type="password" placeholder="Password" name="password" />
-                        </div>
-                    </section>
-                    <footer className="modal-card-foot">
+        <div className="login-box">
+            <div className="modal-card">
+                <header className="modal-card-head">
+                    {isRegisterActive ? <p className="modal-card-title">Register</p> : <p className="modal-card-title">Login</p>}
+                </header>
+                <section className="modal-card-body vertical">
+                    <div className='login-row is-flex'>
+                        <span className="icon"><i className="fas fa-user"></i></span>
+                        <input onChange={handleOnChange} className="login input" type="text" placeholder="Username" name="username" />
+                    </div>
+                    <div className='login-row is-flex'>
+                        <span className="icon"><i className="fas fa-lock"></i></span>
+                        <input onChange={handleOnChange} className="login input" type="password" placeholder="Password" name="password" />
+                    </div>
+                </section>
+                <footer className="modal-card-foot">
+                    <div>
                         {isRegisterActive ? <button onClick={handleRegister} className="button is-link">Register</button> : <button onClick={handleLogin} className="button is-link">Login</button>}
                         {isRegisterActive ? <button className="button" onClick={() => { setisRegisterActive(false) }}>Login</button> : <button className="button" onClick={() => { setisRegisterActive(true) }}>Register</button>}
-                        {isRegisterActive ? '' : <button onClick={handleContinueAsGuest} className="button">Continue as Guest</button>}
-                    </footer>
-                </div>
+                    </div>
+                    {isRegisterActive ? '' : <button onClick={handleContinueAsGuest} className="guest button">Continue as Guest</button>}
+                </footer>
+            </div>
+        </div>
     )
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogin: (token) => dispatch({type: 'ON_LOGIN', payload: token})
+        onLogin: (token) => dispatch({ type: 'ON_LOGIN', payload: token })
     }
 }
 

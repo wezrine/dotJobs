@@ -17,6 +17,7 @@ function Header(props) {
         localStorage.removeItem("username")
         localStorage.removeItem('userId')
         setAuthenticationHeader(null)
+        props.onLogOut()
         history.push('/login')
     }
 
@@ -50,10 +51,16 @@ function Header(props) {
     )
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogOut: (token) => dispatch({ type: 'ON_LOGOUT' })
+    }
+}
+
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.isAuthenticated
     }
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

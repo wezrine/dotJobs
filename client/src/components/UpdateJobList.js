@@ -32,7 +32,7 @@ function UpdateJobList(props) {
 
 
     return (
-        <div>
+        <div className="tile-page">
             <div className="tile is-ancestor">
                 <div className="tile is-vertical is-8">
                     <div className="tile">

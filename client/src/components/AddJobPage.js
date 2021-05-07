@@ -27,7 +27,7 @@ function AddJobPage() {
     }
 
     return (
-        <div>
+        <div className="tile-page">
             <div className="tile is-ancestor">
                 <div className="tile is-vertical is-6">
                     <div className="tile">
@@ -55,7 +55,7 @@ function AddJobPage() {
                             <input onChange={handleOnChange} className='input' type='url' placeholder='Job URL' name='jobURL' />
                             <div className="content">
                                 <article className="message description">
-                                    <textarea onChange={handleOnChange} className="message-body" name='jobDescription'></textarea>
+                                    <textarea onChange={handleOnChange} className="message-body" name='jobDescription' placeholder="Job Description"></textarea>
                                 </article>
                             </div>
                         </div>
