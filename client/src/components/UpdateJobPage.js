@@ -14,7 +14,7 @@ function UpdateJobPage ({ match }) {
     },[])
 
     const getJob = () => {
-        fetch(`http://localhost:8080/details/${id}`)
+        fetch(`https://dotjobs.herokuapp.com/details/${id}`)
         .then(response => response.json())
         .then(job => {
             console.log(job)
@@ -23,7 +23,7 @@ function UpdateJobPage ({ match }) {
     }
 
     const updateJob = (updatedJob) => {
-        fetch('http://localhost:8080/jobs', {
+        fetch('https://dotjobs.herokuapp.com/jobs', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

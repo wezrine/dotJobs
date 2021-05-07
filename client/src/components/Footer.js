@@ -8,9 +8,9 @@ function Footer() {
         <footer className="footer is-dark">
         <div className="content has-text-centered">
             <p>
-            <strong>Jobs</strong> by <a href="https://www.williamezrine.com" target="_blank">William Ezrine</a>. 
+            <strong>dotJobs</strong> by <a href="https://www.williamezrine.com" target="_blank">William Ezrine</a>. 
             <br/>
-            This is a project built using JavaScript, React.js, Redux, Node.js, HTML, CSS, & Bulma. 
+            This is a project built using JavaScript, React.js, Redux, Node.js, MongoDB, HTML, CSS, & Bulma.
             </p>
         </div>
         </footer>

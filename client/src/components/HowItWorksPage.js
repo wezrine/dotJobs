@@ -6,11 +6,11 @@ import 'bulma'
 function LandingPage() {
     return (
         <div>
-            <section className="hero is-info is-fullheight">
-                <div className="hero-body">
+            <section className="hero is-info landing">
+                <div className="hero-body is-flex is-align-items-center">
                     <div className="container has-text-centered">
                         <div className="title"><h1>How it Works!</h1></div>
-                        <h2 className="subtitle">This is react app feat. Bulma</h2>
+                        <h2 className="subtitle">Coming Soon!</h2>
                     </div>
                 </div>
             </section>
