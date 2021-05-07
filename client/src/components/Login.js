@@ -15,7 +15,7 @@ function Login(props) {
     }
 
     const handleLogin = () => {
-        fetch('https://dotjobs.herokuapp.com/login', {
+        fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ function Login(props) {
             password: 'guest123'
         }
 
-        fetch('https://dotjobs.herokuapp.com/login', {
+        fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ function Login(props) {
     }
 
     const handleRegister = () => {
-        fetch('https://dotjobs.herokuapp.com/register', {
+        fetch('http://localhost:8080/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

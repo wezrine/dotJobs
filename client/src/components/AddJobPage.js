@@ -17,7 +17,7 @@ function AddJobPage() {
     }
 
     const handleAddJob = () => {
-        fetch('https://dotjobs.herokuapp.com/jobs', {
+        fetch('http://localhost:8080/jobs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

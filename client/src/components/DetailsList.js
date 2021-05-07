@@ -23,7 +23,7 @@ function DetailsList(props) {
         return (
             <li key={index} className="file-row">
                 <i className="fas file fa-file"></i>
-                <a href={`https://dotjobs.herokuapp.com/uploads/${file.fileURL}`} target="_blank">{file.fileName}</a>
+                <a href={`http://localhost:8080/uploads/${file.fileURL}`} target="_blank">{file.fileName}</a>
                 <i onClick={handleDeleteFile} className="fas fa-minus-circle"></i>
             </li>
         )
@@ -137,7 +137,8 @@ function DetailsList(props) {
                             <div className='row is-flex upload-row'>
                                 <div className="file is-link is-small">
                                     <label className="file-label">
-                                        <input onChange={(e) => handleFileUpload(e, job._id)} name="files" className="file-input" type="file" accept='.pdf' name="resume" />
+                                    {/* onChange={(e) => handleFileUpload(e, job._id)} */}
+                                        <input  name="files" className="file-input" type="file" accept='.pdf' name="resume" />
                                             <span className="file-cta">
                                                 <span className="file-icon">
                                                     <i className="fas fa-upload"></i>

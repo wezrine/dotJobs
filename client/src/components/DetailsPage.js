@@ -17,7 +17,7 @@ function DetailsPage({ match }) {
     },[])
 
     const getJob = () => {
-        fetch(`https://dotjobs.herokuapp.com/details/${id}`)
+        fetch(`http://localhost:8080/details/${id}`)
         .then(response => response.json())
         .then(job => {
             setJob(job)
@@ -27,7 +27,7 @@ function DetailsPage({ match }) {
     }
 
     const addTask = (newTask) => {
-        fetch('https://dotjobs.herokuapp.com/tasks', {
+        fetch('http://localhost:8080/tasks', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ function DetailsPage({ match }) {
     }
 
     const deleteTask = (task) => {
-        fetch(`https://dotjobs.herokuapp.com/tasks/${task.jobId}/${task.taskId}`, {
+        fetch(`http://localhost:8080/tasks/${task.jobId}/${task.taskId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ function DetailsPage({ match }) {
     }
 
     const deleteJob = (jobId) => {
-        fetch(`https://dotjobs.herokuapp.com/jobs/${jobId}`, {
+        fetch(`http://localhost:8080/jobs/${jobId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,7 +65,7 @@ function DetailsPage({ match }) {
         let updatedStatus = {
             updatedStatus: updatedTask.isCompleted
         }
-        fetch(`https://dotjobs.herokuapp.com/tasks/${updatedTask.jobId}/${updatedTask.taskId}`, {
+        fetch(`http://localhost:8080/tasks/${updatedTask.jobId}/${updatedTask.taskId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ function DetailsPage({ match }) {
         const jobId = filePackage.jobId
         const file = filePackage.file
 
-        fetch(`https://dotjobs.herokuapp.com/files/${jobId}`, {
+        fetch(`http://localhost:8080/files/${jobId}`, {
             method: 'POST',
             header: {
                 'Content-Type': 'multi-part/form-data'
@@ -94,7 +94,7 @@ function DetailsPage({ match }) {
     }
 
     const deleteFile = (file) => {
-        fetch(`https://dotjobs.herokuapp.com/files/${file.jobId}/${file.fileId}`, {
+        fetch(`http://localhost:8080/files/${file.jobId}/${file.fileId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
