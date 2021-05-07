@@ -38,8 +38,8 @@ function Header(props) {
             <div id='navbarBasicExample' className={`navbar-menu ${isBurgerActive ? 'is-active' : ''}`}>
                 <div className="navbar-start">
                     <NavLink to="/how-it-works" className="navbar-item">How it Works</NavLink>
-                    <NavLink to="/jobs" className="navbar-item">My Jobs</NavLink>
-                    <NavLink to="/add-job" className="navbar-item">Add a Job</NavLink>
+                    {props.isAuthenticated ? <NavLink to="/jobs" className="navbar-item">My Jobs</NavLink> : ''}
+                    {props.isAuthenticated ? <NavLink to="/add-job" className="navbar-item">Add a Job</NavLink> : ''}
                 </div>
                 <div className="navbar-end">
                     <div className="navbar-item">
