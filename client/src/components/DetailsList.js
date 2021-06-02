@@ -23,7 +23,7 @@ function DetailsList(props) {
         return (
             <li key={index} className="file-row">
                 <i className="fas file fa-file"></i>
-                <a href={`http://localhost:8080/uploads/${file.fileURL}`} target="_blank">{file.fileName}</a>
+                <a href={`https://dotjobs.herokuapp.com/uploads/${file.fileURL}`} target="_blank">{file.fileName}</a>
                 <i onClick={handleDeleteFile} className="fas fa-minus-circle"></i>
             </li>
         )

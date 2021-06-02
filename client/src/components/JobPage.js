@@ -12,7 +12,7 @@ function JobPage() {
 
     const getAllJobs = () => {
         const userId = localStorage.getItem('userId')
-        axios.get(`http://localhost:8080/jobs/${userId}`)
+        axios.get(`https://dotjobs.herokuapp.com/jobs/${userId}`)
         .then(response => {
             if(response.data.error) {
                 console.log(response.data.error)
@@ -23,7 +23,7 @@ function JobPage() {
     }
 
     const updateStatus = (updatedJob) => {
-        fetch('http://localhost:8080/status', {
+        fetch('https://dotjobs.herokuapp.com/status', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
